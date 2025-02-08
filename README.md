@@ -12,4 +12,20 @@ Clinical Data: The primary dataset used for this analysis is the "clinical_data.
 
 - Excel - Data cleanining
 - SQL Server - Data Analysis 
-- Tablaur - Visualization/ Report 
+- Tableau - Visualization/ Report
+
+### Data Cleaning/ Preparation 
+
+In the initial preparation phase, I perform the folowing tasks;
+1. Data loading and inspection
+2. Removing all duplicate
+3. Handling missing values
+4. Data formatting
+
+### Exploratory Data Analysis (EDA)
+EDA involve the exploring clinical data to answer key questions, such as;
+
+- Which diseases are more frequent in males and females?
+- What is the proportion of new, old, and recurring cases?
+- Do certain diseases occur more in specific age groups?
+- What are the most common diagnoses among patients?
