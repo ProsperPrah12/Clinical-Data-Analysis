@@ -1,26 +1,36 @@
-# Documenting Clinical project work
+# Documenting Sales project work
 
 ### Project Over view 
 
-This project analyzes patient diagnosis data to identify disease patterns across demographics. It examines the most common diseases, gender and age-based prevalence, and the impact of insurance coverage. By comparing new, old, and recurring cases, the project provides insights into healthcare trends. The findings support public health decisions, hospital resource planning, and policy evaluation.
+This project analyzes sales data to uncover insights on salespeople, products, and countries. It explores trends over time, identifies top performers, and highlights key revenue drivers. The analysis uses Python (pandas, matplotlib, numpy) for data manipulation and visualization.
 
 ### Data Sources
 
-Clinical Data: The primary dataset used for this analysis is the "clinical_data.csv" file, containing detail information about patient diagnosis.
+Sale Data: The primary dataset used for this analysis is the "clinical_data.csv" file, containing detail information about patient diagnosis.
 
 ### Tools Used
 
-- Excel - Data cleanining
-- SQL Server - Data Analysis 
-- Tableau - Visualization/ Report
+- Python (pandas, matplotlib, numpy)
 
 ### Data Cleaning/ Preparation 
 
 In the initial preparation phase, I perform the folowing tasks;
 1. Data loading and inspection
-2. Removing all duplicate
-3. Handling missing values
-4. Data formatting
+2. Cleaning empty cells
+```python
+   import pandas as pd
+   data = pd.read_csv("sale.csv")
+   data.dropna(inplace = True)
+   print(data.to_string())
+```
+3. Cleaning wrong format
+```python
+  import pandas as pd
+  df = pd.read_csv('data.csv')
+  df['Date'] = pd.to_datetime(df['Date'], format='mixed')
+  print(df.to_string())
+```
+5. Data formatting
 
 ### Exploratory Data Analysis (EDA)
 EDA involve the exploring clinical data to answer key questions, such as;
