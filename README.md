@@ -35,9 +35,9 @@ In the initial preparation phase, I perform the folowing tasks;
       import pandas as pd
       Data = pd.read_csv("sale.csv")
       print(Data.duplicated().to_string())
-```
+   ```
 ### Exploratory Data Analysis (EDA)
-EDA involve the exploring clinical data to answer key questions, such as;
+ EDA involve the exploring clinical data to answer key questions, such as;
 
 - Create a pivot table showing total sales by Country and Product.
 - Analyze seasonality: Do certain products sell better in particular months?
@@ -46,3 +46,50 @@ EDA involve the exploring clinical data to answer key questions, such as;
 - Forecast: Based on trends, estimate the next month’s sales using simple time-series methods.
 
 ### Data Analysis
+
+- Create a pivot table showing total sales by Country and Product.
+
+```python
+      import pandas as pd
+      import numpy as np
+      import matplotlib.pyplot as plt
+      
+      # Load the data
+      df = pd.read_csv("sale.csv")
+      
+      # Create pivot table
+      pivot_table = pd.pivot_table(
+          df,
+          values="Amount",
+          index="Country",
+          columns="Product",
+          aggfunc="sum",
+          fill_value=0
+      )
+      
+      
+      # Plot heatmap using numpy + matplotlib
+      plt.figure(figsize=(14, 8))
+      
+      # Convert pivot table to numpy array
+      data = pivot_table.values
+      
+      # Show the heatmap
+      plt.imshow(data, cmap="YlGnBu", aspect="auto")
+      
+      # Add colorbar
+      plt.colorbar(label="Total Sales Amount")
+      
+      # Set ticks and labels
+      plt.xticks(np.arange(len(pivot_table.columns)), pivot_table.columns, rotation=90)
+      plt.yticks(np.arange(len(pivot_table.index)), pivot_table.index)
+      
+      # Add title
+      plt.title("Total Sales by Country and Product (Heatmap with NumPy + Matplotlib)", fontsize=14)
+      
+      plt.tight_layout()
+      plt.show()
+   ```
+- Analyze seasonality: Do certain products sell better in particular months?
+
+  
