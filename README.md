@@ -6,7 +6,7 @@ This project analyzes sales data to uncover insights on salespeople, products, a
 
 ### Data Sources
 
-Sale Data: The primary dataset used for this analysis is the "clinical_data.csv" file, containing detail information about patient diagnosis.
+Sale Data: The primary dataset used for this analysis is the "sale.csv" file, containing detail information about patient diagnosis.
 
 ### Tools Used
 
@@ -26,16 +26,23 @@ In the initial preparation phase, I perform the folowing tasks;
 3. Cleaning wrong format
 ```python
   import pandas as pd
-  df = pd.read_csv('data.csv')
-  df['Date'] = pd.to_datetime(df['Date'], format='mixed')
-  print(df.to_string())
+   Data= pd.read_csv('sale.csv')
+   Data['Date'] = pd.to_datetime(Data['Date'], format='mixed')
+   print(Data.to_string())
 ```
-5. Data formatting
-
+5. Removing Duplicates
+   ```python
+      import pandas as pd
+      Data = pd.read_csv("sale.csv")
+      print(Data.duplicated().to_string())
+```
 ### Exploratory Data Analysis (EDA)
 EDA involve the exploring clinical data to answer key questions, such as;
 
-- Which diseases are more frequent in males and females?
-- What is the proportion of new, old, and recurring cases?
-- Do certain diseases occur more in specific age groups?
-- What are the most common diagnoses among patients?
+- Create a pivot table showing total sales by Country and Product.
+- Analyze seasonality: Do certain products sell better in particular months?
+- Build a correlation analysis between Amount and Boxes Shipped.
+- Identify the top 3 salespeople in each country by sales amount.
+- Forecast: Based on trends, estimate the next month’s sales using simple time-series methods.
+
+### Data Analysis
