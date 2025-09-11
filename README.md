@@ -6,7 +6,7 @@ This project analyzes sales data to uncover insights on salespeople, products, a
 
 ### Data Sources
 
-Sale Data: The primary dataset used for this analysis is the "sale.csv" file, containing detail information about sale.
+Sale Data: The primary dataset used for this analysis is the "sale.csv" file, containing detail information about sales.
 
 ### Tools Used
 
@@ -25,17 +25,17 @@ In the initial preparation phase, I perform the folowing tasks;
 ```
 3. Cleaning wrong format
 ```python
-  import pandas as pd
+   import pandas as pd
    Data= pd.read_csv('sale.csv')
    Data['Date'] = pd.to_datetime(Data['Date'], format='mixed')
    print(Data.to_string())
 ```
 5. Removing Duplicates
-   ```python
-      import pandas as pd
-      Data = pd.read_csv("sale.csv")
-      print(Data.duplicated().to_string())
-   ```
+ ```python
+    import pandas as pd
+    Data = pd.read_csv("sale.csv")
+    print(Data.duplicated().to_string())
+ ```
 ### Exploratory Data Analysis (EDA)
  EDA involve the exploring clinical data to answer key questions, such as;
 
@@ -92,4 +92,93 @@ In the initial preparation phase, I perform the folowing tasks;
    ```
 - Analyze seasonality: Do certain products sell better in particular months?
 
-  
+   ```python
+      import pandas as pd 
+      import numpy as np
+      import matplotlib.pyplot 
+      
+      # Load the file 
+      df = pd.read_csv("sales.csv", encoding = 'latin-1')
+      
+      # Remove any non-numeric characters (like commas, $, £)
+      df["Amount"] = df["Amount"].replace(r"[^\d.]", "", regex=True).astype(float)
+      
+      # Convert Date column to datetime
+      df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+      
+      # Extract month name from Date
+      df["Month"] = df["Date"].dt.month_name()
+      
+      # Group by Product and Month
+      monthly_sales = df.groupby(["Product", "Month"])["Amount"].sum().reset_index()
+      
+      # Pivot for better visualization
+      pivot_seasonality = monthly_sales.pivot(index="Month",  columns="Product",  values="Amount").fillna(0)
+      
+      month_order = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+      ]
+      pivot_seasonality = pivot_seasonality.reindex(month_order)
+
+      # plot
+      plt.figure(figsize=(14, 8))
+      for product in pivot_seasonality.columns:
+          plt.plot(pivot_seasonality.index, pivot_seasonality[product],marker ="o" label=product)
+      
+      plt.title("Seasonality of Product Sales", fontsize=16)
+      plt.xlabel("Month")
+      plt.ylabel("Total Sales Amount")
+      plt.xticks(rotation=45)
+
+      # Put legend outside
+      plt.legend(bbox_to_anchor=(1.05, 1), loc="upper left")  
+      plt.tight_layout()
+      plt.show()
+   ```
+- Identify the top 3 salespeople in each country by sales amount
+   ```python
+      import pandas as pd
+      import matplotlib.pyplot as plt
+      import numpy as np
+      
+      # Load dataset
+      df = pd.read_csv("sales.csv", encoding="latin-1")
+      
+      # Clean Amount column
+      df["Amount"] = df["Amount"].replace(r"[^\d.]", "", regex=True).astype(float) 
+      
+      # Group by Country and Salesperson, sum the sales
+      sales_by_person = df.groupby(["Country", "Sales Person"])["Amount"].sum().reset_index()
+      
+      # Rank salespeople within each country
+      sales_by_person["Rank"] = sales_by_person.groupby("Country")["Amount"].rank(method="first", ascending=False)
+      
+      # Get top 3 salespeople per country
+      top3_salespeople = sales_by_person[sales_by_person["Rank"] <= 3].sort_values(["Country", "Rank"])
+      
+      print(top3_salespeople)
+   ```
+- Identify the top 3 salespeople in each country by sales amount.
+
+  ```python
+     import pandas as pd
+      import numpy as np
+      
+      # Load dataset
+      df = pd.read_csv("sales.csv", encoding="latin-1")
+      
+      # Clean Amount column
+      df["Amount"] = df["Amount"].replace(r"[^\d.]", "", regex=True).astype(float) 
+      
+      # Group by Country and Salesperson, sum the sales
+      sales_by_person = df.groupby(["Country", "Sales Person"])["Amount"].sum().reset_index()
+      
+      # Rank salespeople within each country
+      sales_by_person["Rank"] = sales_by_person.groupby("Country")["Amount"].rank(method="first", ascending=False)
+      
+      # Get top 3 salespeople per country
+      top3_salespeople = sales_by_person[sales_by_person["Rank"] <= 3].sort_values(["Country", "Rank"])
+      
+      print(top3_salespeople)
+   ```  
