@@ -19,21 +19,21 @@ In the initial preparation phase, I perform the folowing tasks;
 2. Cleaning empty cells
 ```python
    import pandas as pd
-   data = pd.read_csv("sale.csv")
+   data = pd.read_csv("sales.csv")
    data.dropna(inplace = True)
    print(data.to_string())
 ```
 3. Cleaning wrong format
 ```python
    import pandas as pd
-   Data= pd.read_csv('sale.csv')
+   Data= pd.read_csv('sales.csv')
    Data['Date'] = pd.to_datetime(Data['Date'], format='mixed')
    print(Data.to_string())
 ```
 5. Removing Duplicates
  ```python
     import pandas as pd
-    Data = pd.read_csv("sale.csv")
+    Data = pd.read_csv("sales.csv")
     print(Data.duplicated().to_string())
  ```
 ### Exploratory Data Analysis (EDA)
@@ -55,7 +55,7 @@ In the initial preparation phase, I perform the folowing tasks;
       import matplotlib.pyplot as plt
       
       # Load the data
-      df = pd.read_csv("sale.csv")
+      df = pd.read_csv("sales.csv")
       
       # Create pivot table
       pivot_table = pd.pivot_table(
@@ -182,3 +182,41 @@ In the initial preparation phase, I perform the folowing tasks;
       
       print(top3_salespeople)
    ```  
+- Forecast: Based on trends, estimate the next month’s sales using simple time-series methods.
+  ```python
+     import pandas as pd
+      import matplotlib.pyplot as plt
+      
+      # Ensure Date is datetime
+      df["Date"] = pd.to_datetime(df["Date"])
+      
+      # Clean Amount column
+      df["Amount"] = df["Amount"].replace(r"[^\d.]", "", regex=True).astype(float)
+      
+      # Aggregate sales by month
+      monthly_sales = df.groupby(df["Date"].dt.to_period("M"))["Amount"].sum().reset_index()
+      monthly_sales["Date"] = monthly_sales["Date"].dt.to_timestamp()
+      
+      # Calculate 3-month moving average
+      monthly_sales["3_MA"] = monthly_sales["Amount"].rolling(window=3).mean()
+      
+      # Forecast next month = last available 3-month average
+      forecast_next = monthly_sales["3_MA"].iloc[-1]
+      print("Forecast for next month (Moving Average):", forecast_next)
+      
+      # plot
+      plt.figure(figsize=(10, 6))
+      plt.plot(monthly_sales["Date"], monthly_sales["Amount"], marker="o", label="Actual Sales")
+      plt.plot(monthly_sales["Date"], monthly_sales["3_MA"], marker="x", linestyle="--", label="3-Month Moving Avg")
+      
+      # Extend forecast
+      next_month = monthly_sales["Date"].iloc[-1] + pd.DateOffset(months=1)
+      plt.scatter(next_month, forecast_next, color="red", label="Forecast (Next Month)")
+      
+      plt.title("Monthly Sales with Forecast")
+      plt.xlabel("Month")
+      plt.ylabel("Sales Amount")
+      plt.legend()
+      plt.grid(True)
+      plt.show()
+  ```
