@@ -90,6 +90,9 @@ In the initial preparation phase, I perform the folowing tasks;
       plt.tight_layout()
       plt.show()
    ```
+![Chat 1](https://github.com/user-attachments/assets/c3950298-5724-4827-9c29-e26cc1c7c13d)
+
+
 - Analyze seasonality: Do certain products sell better in particular months?
 
    ```python
@@ -136,6 +139,8 @@ In the initial preparation phase, I perform the folowing tasks;
       plt.tight_layout()
       plt.show()
    ```
+![Chat 2](https://github.com/user-attachments/assets/f27da1d1-8f3f-4e3e-8a9b-beb1f5acac54)
+
 - Identify the top 3 salespeople in each country by sales amount
    ```python
       import pandas as pd
@@ -220,3 +225,4 @@ In the initial preparation phase, I perform the folowing tasks;
       plt.grid(True)
       plt.show()
   ```
+![Chat 3](https://github.com/user-attachments/assets/5e9a98c8-750a-472c-815d-e4a7a8f1ac84)
