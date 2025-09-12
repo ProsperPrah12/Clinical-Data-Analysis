@@ -47,7 +47,7 @@ In the initial preparation phase, I perform the folowing tasks;
 
 ### Data Analysis
 
-- Create a pivot table showing total sales by Country and Product.
+1. Create a pivot table showing total sales by Country and Product.
 
 ```python
       import pandas as pd
@@ -93,7 +93,7 @@ In the initial preparation phase, I perform the folowing tasks;
 ![Chat 1](https://github.com/user-attachments/assets/c3950298-5724-4827-9c29-e26cc1c7c13d)
 
 
-- Analyze seasonality: Do certain products sell better in particular months?
+2. Analyze seasonality: Do certain products sell better in particular months?
 
    ```python
       import pandas as pd 
@@ -127,7 +127,7 @@ In the initial preparation phase, I perform the folowing tasks;
       # plot
       plt.figure(figsize=(14, 8))
       for product in pivot_seasonality.columns:
-          plt.plot(pivot_seasonality.index, pivot_seasonality[product],marker ="o" label=product)
+      plt.plot(pivot_seasonality.index, pivot_seasonality[product],marker ="o" label=product)
       
       plt.title("Seasonality of Product Sales", fontsize=16)
       plt.xlabel("Month")
@@ -141,7 +141,7 @@ In the initial preparation phase, I perform the folowing tasks;
    ```
 ![Chat 2](https://github.com/user-attachments/assets/f27da1d1-8f3f-4e3e-8a9b-beb1f5acac54)
 
-- Identify the top 3 salespeople in each country by sales amount
+3. Identify the top 3 salespeople in each country by sales amount
    ```python
       import pandas as pd
       import matplotlib.pyplot as plt
@@ -166,7 +166,7 @@ In the initial preparation phase, I perform the folowing tasks;
    ```
 ![Chat 4](https://github.com/user-attachments/assets/7665b490-08dc-4b31-aa9c-a3d74bd5cc0d)
 
-- Identify the top 3 salespeople in each country by sales amount.
+4. Identify the top 3 salespeople in each country by sales amount.
 
   ```python
      import pandas as pd
@@ -189,7 +189,7 @@ In the initial preparation phase, I perform the folowing tasks;
       
       print(top3_salespeople)
    ```  
-- Forecast: Based on trends, estimate the next month’s sales using simple time-series methods.
+5. Forecast: Based on trends, estimate the next month’s sales using simple time-series methods.
   ```python
      import pandas as pd
       import matplotlib.pyplot as plt
