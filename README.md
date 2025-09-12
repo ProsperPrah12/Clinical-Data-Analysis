@@ -164,6 +164,8 @@ In the initial preparation phase, I perform the folowing tasks;
       
       print(top3_salespeople)
    ```
+![Chat 4](https://github.com/user-attachments/assets/7665b490-08dc-4b31-aa9c-a3d74bd5cc0d)
+
 - Identify the top 3 salespeople in each country by sales amount.
 
   ```python
