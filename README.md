@@ -6,7 +6,7 @@ This project analyzes sales data to uncover insights on salespeople, products, a
 
 ### Data Sources
 
-Sale Data: The primary dataset used for this analysis is the "sale.csv" file, containing detail information about sales.
+Sale Data: The primary dataset used for this analysis is the "sales.csv" file, containing detail information about sales.
 
 ### Tools Used
 
