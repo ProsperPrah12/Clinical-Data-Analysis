@@ -141,30 +141,46 @@ In the initial preparation phase, I perform the folowing tasks;
    ```
 ![Chat 2](https://github.com/user-attachments/assets/f27da1d1-8f3f-4e3e-8a9b-beb1f5acac54)
 
-3. Identify the top 3 salespeople in each country by sales amount
+3. Forecast: Based on trends, estimate the next month’s sales using simple time-series methods.
+   
    ```python
       import pandas as pd
       import matplotlib.pyplot as plt
-      import numpy as np
       
-      # Load dataset
-      df = pd.read_csv("sales.csv", encoding="latin-1")
+      # Ensure Date is datetime
+      df["Date"] = pd.to_datetime(df["Date"])
       
       # Clean Amount column
-      df["Amount"] = df["Amount"].replace(r"[^\d.]", "", regex=True).astype(float) 
+      df["Amount"] = df["Amount"].replace(r"[^\d.]", "", regex=True).astype(float)
       
-      # Group by Country and Salesperson, sum the sales
-      sales_by_person = df.groupby(["Country", "Sales Person"])["Amount"].sum().reset_index()
+      # Aggregate sales by month
+      monthly_sales = df.groupby(df["Date"].dt.to_period("M"))["Amount"].sum().reset_index()
+      monthly_sales["Date"] = monthly_sales["Date"].dt.to_timestamp()
       
-      # Rank salespeople within each country
-      sales_by_person["Rank"] = sales_by_person.groupby("Country")["Amount"].rank(method="first", ascending=False)
+      # Calculate 3-month moving average
+      monthly_sales["3_MA"] = monthly_sales["Amount"].rolling(window=3).mean()
       
-      # Get top 3 salespeople per country
-      top3_salespeople = sales_by_person[sales_by_person["Rank"] <= 3].sort_values(["Country", "Rank"])
+      # Forecast next month = last available 3-month average
+      forecast_next = monthly_sales["3_MA"].iloc[-1]
+      print("Forecast for next month (Moving Average):", forecast_next)
       
-      print(top3_salespeople)
+      # plot
+      plt.figure(figsize=(10, 6))
+      plt.plot(monthly_sales["Date"], monthly_sales["Amount"], marker="o", label="Actual Sales")
+      plt.plot(monthly_sales["Date"], monthly_sales["3_MA"], marker="x", linestyle="--", label="3-Month Moving Avg")
+      
+      # Extend forecast
+      next_month = monthly_sales["Date"].iloc[-1] + pd.DateOffset(months=1)
+      plt.scatter(next_month, forecast_next, color="red", label="Forecast (Next Month)")
+      
+      plt.title("Monthly Sales with Forecast")
+      plt.xlabel("Month")
+      plt.ylabel("Sales Amount")
+      plt.legend()
+      plt.grid(True)
+      plt.show()
    ```
-![Chat 4](https://github.com/user-attachments/assets/7665b490-08dc-4b31-aa9c-a3d74bd5cc0d)
+![Chat 5](https://github.com/user-attachments/assets/575f59ab-a42c-4094-b844-1028a416fae6)
 
 4. Identify the top 3 salespeople in each country by sales amount.
 
@@ -188,8 +204,10 @@ In the initial preparation phase, I perform the folowing tasks;
       top3_salespeople = sales_by_person[sales_by_person["Rank"] <= 3].sort_values(["Country", "Rank"])
       
       print(top3_salespeople)
-   ```  
-5. Forecast: Based on trends, estimate the next month’s sales using simple time-series methods.
+   ```
+![Chat 4](https://github.com/user-attachments/assets/7665b490-08dc-4b31-aa9c-a3d74bd5cc0d)
+
+5. Build a correlation analysis between Amount and Boxes Shipped.
   ```python
      import pandas as pd
       import matplotlib.pyplot as plt
