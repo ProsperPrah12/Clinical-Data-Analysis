@@ -232,11 +232,23 @@ In the initial preparation phase, I perform the folowing tasks;
 ### Results
 1. Sales by Country and Product
     - A pivot table revealed variations in sales performance across different countries and products. This provided insights into which products dominate        in specific markets.
+      
 2. Seasonality of Sales
    - Monthly sales aggregation showed that certain products exhibit seasonal trends, performing better in particular months. These patterns can help            with planning inventory and marketing strategies.
+     
 3. Correlation Between Amount and Boxes Shipped
    - The correlation coefficient between sales amount and boxes shipped was -0.0188. Its indicates almost no linear relationship, suggesting that higher        sales revenue is not necessarily linked to higher shipment volumes.
+     
 4. Top Salespeople by Country
    - Ranking salespeople by sales amounts identified the top three performers in each country and highlight regional leaders and provide benchmarks             for performance evaluation.
+     
 5. Sales Forecasting
    - Using a 3-month moving average, the forecast for next month’s sales was estimated. This simple time-series method offers a baseline prediction that        can be improved with more advanced forecasting models.
+
+### Recommendations
+
+- Focus marketing campaigns and inventory planning around products that show strong seasonal demand.
+- Adjust pricing strategies and introduce product bundles to increase overall revenue per transaction.
+- Recognize top-performing salespeople and share their strategies to improve performance across teams.
+- Invest in more advanced forecasting models to anticipate sales trends with higher accuracy.
+- Implement real-time dashboards to monitor sales and support faster, data-driven decision-making.
