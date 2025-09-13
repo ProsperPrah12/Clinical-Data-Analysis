@@ -270,3 +270,10 @@ In the initial preparation phase, I perform the folowing tasks;
 - Recognize top-performing salespeople and share their strategies to improve performance across teams.
 - Invest in more advanced forecasting models to anticipate sales trends with higher accuracy.
 - Implement real-time dashboards to monitor sales and support faster, data-driven decision-making.
+
+### Limitations 
+
+1. The analysis is based solely on the provided dataset, which may not capture external factors such as market competition or economic conditions.
+2. Sales data was aggregated at the monthly level, limiting insights into weekly or daily fluctuations.
+3. Certain business drivers, such as marketing spend, customer demographics, or promotional activities, were not included in the dataset.
+4. While correlations between variables were analyzed, correlation does not imply causation, and deeper statistical modeling may be required.
